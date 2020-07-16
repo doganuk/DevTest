@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeveloperTest.Database.Models
 {
@@ -7,12 +6,8 @@ namespace DeveloperTest.Database.Models
     {
         public int JobId { get; set; }
 
-        public int? CustomerId { get; set; }
-
         public string Engineer { get; set; }
 
         public DateTime When { get; set; }
-        [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; }
     }
 }
