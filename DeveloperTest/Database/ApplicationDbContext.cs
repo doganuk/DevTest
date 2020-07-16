@@ -7,6 +7,7 @@ namespace DeveloperTest.Database
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -24,13 +25,30 @@ namespace DeveloperTest.Database
                 .Property(x => x.JobId)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Job>()
-                .HasData(new Job
+         
+            modelBuilder.Entity<Customer>()
+            .HasKey(x => x.CustomerId);
+
+            modelBuilder.Entity<Customer>()
+                .Property(x => x.CustomerId)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Customer>()
+                .HasData(new Customer
                 {
-                    JobId = 1,
-                    Engineer = "Test",
-                    When = DateTime.Now
+                    CustomerId = 1,
+                    Type = "Large",
+                    Name = "Deloitte"
                 });
+
+            modelBuilder.Entity<Job>()
+             .HasData(new Job
+             {
+                 JobId = 1,
+                 Engineer = "Test",
+                 When = DateTime.Now
+             });
+
         }
     }
 }
